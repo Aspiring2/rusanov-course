@@ -1,22 +1,41 @@
-// import React from 'react';
-// import { useParams } from 'react-router-dom';
-// import Container from '@mui/material/Container';
-// import Typography from '@mui/material/Typography';
+// BlogPostDetails.jsx
+import React from 'react'
+import Typography from '@mui/material/Typography'
+import Card from '@mui/material/Card'
+import CardHeader from '@mui/material/CardHeader'
+import CardContent from '@mui/material/CardContent'
+import CardActions from '@mui/material/CardActions'
+import Button from '@mui/material/Button'
+import { fetchPosts } from '../redux/slices/posts'
+import { Link } from 'react-router-dom'
 
-// function BlogPost() {
-//   const { postId } = useParams();
-//   const post = { id: 1, title: 'Post 1', body: 'This is the first post.' }; // replace with API call or store lookup
+function BlogPost(props) {
+    const post = props.post
+    console.log(post)
+return (
+<>
+    <CardHeader title={post.title} />
+    <CardContent>
+        <Typography variant="body2" color="text.secondary">
+        {post.text}
+        </Typography>
+        <Typography variant="caption" color="text.secondary" sx={{ mt: 1 }}>
+            Tags: {post.tags && post.tags.join(', ')}
+        </Typography>
 
-//   return (
-//     <Container maxWidth="sm">
-//       <Typography variant="h4" component="h1" gutterBottom>
-//         {post.title}
-//       </Typography>
-//       <Typography variant="body1" gutterBottom>
-//         {post.body}
-//       </Typography>
-//     </Container>
-//   );
-// }
+        <Typography variant="caption" color="text.secondary">
+        Views: {post.viewsCount}
+        </Typography>
+    </CardContent>
+    <CardActions>
+        
+    </CardActions>
+</>
+)
+}
 
-// export default BlogPost;
+export default BlogPost
+
+
+
+

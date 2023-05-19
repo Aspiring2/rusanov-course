@@ -6,7 +6,7 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
 	return data
 })
 
-export const fetchServices = createAsyncThunk('posts/fetchServices', async () => {
+export const fetchServices = createAsyncThunk('services/fetchServices', async () => {
 	const { data } = await axios.get('/services')
 	return data
 })
@@ -50,17 +50,18 @@ const serviceSlice = createSlice({
 	initialState,
 	reducers: {},
 	extraReducers: {
-		[fetchPosts.pending]: (state) => {
-			state.posts.status = 'loading'
+		[fetchServices.pending]: (state) => {
+			state.services.status = 'loading'
 		},
-		[fetchPosts.fulfilled]: (state, action) => {
-			state.posts.items = action.payload
-			state.posts.status = 'loaded'
+		[fetchServices.fulfilled]: (state, action) => {
+			state.services.items = action.payload
+			state.services.status = 'loaded'
 		},
-		[fetchPosts.rejected]: (state) => {
-			state.posts.items = []
-			state.posts.status = 'error'
+		[fetchServices.rejected]: (state) => {
+			state.services.items = []
+			state.services.status = 'error'
 		},
 	},
 })
 export const postReducer = postSlice.reducer
+export const serviceReducer = serviceSlice.reducer

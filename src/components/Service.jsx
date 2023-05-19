@@ -1,41 +1,41 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import servicesData from '../assets/data/serviceData.json';
-import { Box, CardMedia } from '@mui/material';
+// BlogPostDetails.jsx
+import React from 'react'
+import Typography from '@mui/material/Typography'
+import Card from '@mui/material/Card'
+import CardHeader from '@mui/material/CardHeader'
+import CardContent from '@mui/material/CardContent'
+import CardActions from '@mui/material/CardActions'
+import Button from '@mui/material/Button'
+import { fetchPosts } from '../redux/slices/posts'
+import { Link } from 'react-router-dom'
 
+function Service(props) {
+    const service = props.service
+    console.log(service)
+return (
+<>
+    <CardHeader title={service.title} />
+    <CardContent>
+        <Typography variant="body2" color="text.secondary">
+        {service.text}
+        </Typography>
+        <Typography variant="caption" color="text.secondary" sx={{ mt: 1 }}>
+            Tags: {service.tags && service.tags.join(', ')}
+        </Typography>
 
-
-function Service() {
-  const { serviceId } = useParams();
-  const services = servicesData.services;
-  
-  
-
-  const service = services.find(service => service.id === parseInt(serviceId));
-  if (!service) {
-    return <div>Service not found</div>;
-  }
-
-  return (
-    <Container maxWidth="sm">
-      <Typography variant="h4" component="h1" gutterBottom>
-        {service.title}
-      </Typography>
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <CardMedia
-          component="img"
-          height="200"
-          image={require(`../assets/images/${service.image}`).default}
-          alt={service.title}
-        />
-      </Box>
-      <Typography variant="body1" gutterBottom>
-        {service.description}
-      </Typography>
-    </Container>
-  );
+        <Typography variant="caption" color="text.secondary">
+        Views: {service.viewsCount}
+        </Typography>
+    </CardContent>
+    <CardActions>
+        
+    </CardActions>
+</>
+)
 }
 
-export default Service;
+export default Service
+
+
+
+

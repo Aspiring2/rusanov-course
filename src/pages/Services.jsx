@@ -10,44 +10,39 @@ import CardActions from '@mui/material/CardActions'
 import Button from '@mui/material/Button'
 import serviceData from '../assets/data/serviceData.json'
 
+import Service from '../components/Service'
+
 import axios from '../axios';
-import { fetchPosts } from '../redux/slices/posts'
+import { fetchServices } from '../redux/slices/services'
 
 
 function Services() {
-	const services = serviceData.services
+	const servicesPre = serviceData.services
 	const dispatch = useDispatch()
-	const {posts, tags} = useSelector(state => state.posts)
+	const {services, tags} = useSelector(state => state.services)
 
-	const isPostLoading = posts.status === 'loading'
-
+	const isPostLoading = services.status === 'loading'
+console.log()
 	React.useEffect(() => {
-		dispatch(fetchPosts())
+		dispatch(fetchServices())
 	  }, [])
-console.log(posts)
+
 	return (
 		<Container maxWidth="sm">
 			<Typography variant="h4" component="h1" gutterBottom>
 				Services
 			</Typography>
-			{(isPostLoading ? services : posts.items).map((service, index) => (
+			{(isPostLoading ? servicesPre
+			 : services.items).map((service, index) => (
+				<>
 				<Card key={service._id} sx={{ mb: 2 }}>
-					<CardHeader title={service.title} />
-					<CardContent>
-						<Typography variant="body2" color="text.secondary">
-							{service.text}
-						</Typography>
-					</CardContent>
-					<CardActions>
-						<Button
-							component={Link}
-							to={`/services/${service._id}`}
-							size="small"
-						>
-							Learn More
-						</Button>
-					</CardActions>
-				</Card>
+					<Service service={service}/>
+					<Button component={Link} to={`/services/${service._id}`} size="small">
+						Learn More
+					</Button>
+				</Card>		
+				
+				</>
 			))}
 		</Container>
 	)
